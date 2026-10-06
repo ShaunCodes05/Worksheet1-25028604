@@ -1,65 +1,100 @@
 using JetBrains.Annotations;
 using UnityEngine;
 
-public enum GameState {GAMEPLAY, PAUSE}
+// base class for all states
+public abstract class GameStateBase
+{
+    protected GameCon controller;
+
+    // gives the state a reference to the controller
+    public void Initialize(GameCon controller)
+    {
+        this.controller = controller;
+    }
+
+    public abstract void Enter();
+    public abstract void Update();
+    public abstract void Exit();
+}
+
+// normal gameplay state
+public class GAMEPLAY : GameStateBase
+{
+    public override void Enter()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    public override void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            controller.ChangeState(controller.PAUSE);
+        }
+    }
+
+    public override void Exit()
+    {
+        // nothing here yet
+    }
+}
+
+// pause state
+public class PAUSE : GameStateBase
+{
+    public override void Enter()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    public override void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            controller.ChangeState(controller.GAMEPLAY);
+        }
+    }
+
+    public override void Exit()
+    {
+        // nothing here yet
+    }
+}
 
 public class GameCon : MonoBehaviour
 {
+    // add new states here
+    public GAMEPLAY GAMEPLAY { get; private set; }
+    public PAUSE PAUSE { get; private set; }
 
-    public GameState state;
+    private GameStateBase currentState;
 
-    bool ChangeGamestate;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // make the states
+        GAMEPLAY = new GAMEPLAY();
+        PAUSE = new PAUSE();
+
+        // hand them the controller
+        GAMEPLAY.Initialize(this);
+        PAUSE.Initialize(this);
+
+        // start on gameplay
+        ChangeState(GAMEPLAY);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        switch (state)
-        {
-            case GameState.GAMEPLAY:
-                {
-                    if (Input.GetKeyDown(KeyCode.Return))
-                    {
-                        state = GameState.PAUSE;
-                        ChangeGamestate = true;
-                        print("yes");
-                    }
-                    break;
-                }
-            case GameState.PAUSE:
-                {
-                    if (Input.GetKeyDown(KeyCode.Return))
-                    {
-                        state = GameState.GAMEPLAY;
-                        ChangeGamestate = true;
-                    }
-                    break;
-                }
-
-            default:
-                {
-                    break;
-                }
-        }
+        currentState?.Update();
     }
-    private void LateUpdate()
+
+    // switches to a new state
+    public void ChangeState(GameStateBase newState)
     {
-        if (ChangeGamestate)
-        {
-            if (state == GameState.PAUSE)
-            {
-                Time.timeScale = 0.0f;
-            }
-            else if (state == GameState.GAMEPLAY)
-            { Time.timeScale = 1.0f; }
+        if (newState == null || newState == currentState) return;
 
-           ChangeGamestate = false;
-        }
-
+        currentState?.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 }
