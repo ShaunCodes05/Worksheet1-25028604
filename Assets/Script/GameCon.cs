@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using UnityEngine;
 
 // base class for all states
@@ -67,7 +66,7 @@ public class GameCon : MonoBehaviour
     public GAMEPLAY GAMEPLAY { get; private set; }
     public PAUSE PAUSE { get; private set; }
 
-    private GameStateBase currentState;
+    public GameStateBase currentState { get; private set; }
 
     void Start()
     {
