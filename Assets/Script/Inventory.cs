@@ -4,13 +4,15 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> Items = new List<string>();
+    public List<string> items = new List<string>();
+
 
     public GameCon gameManager;
 
     void Start()
     {
         gameManager = FindAnyObjectByType<GameCon>();
+        
     }
 
     void Update()
@@ -27,11 +29,29 @@ public class Inventory : MonoBehaviour
 
     public void AddItemToInventory(string itemName)
     {
-        Items.Add(itemName);
+        items.Add(itemName);
     }
 
     public void RemoveItemFromInventory(string itemName)
     {
-        Items.Remove(itemName);
+        items.Remove(itemName);
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Item item = hit.gameObject.GetComponent<Item>();
+
+        if (item != null)
+        {
+            Debug.Log("hit item");
+            items.Add(item.itemName);
+
+            item.Oncollect();
+        }
+
+       
+    }
+
+   
+
 }
