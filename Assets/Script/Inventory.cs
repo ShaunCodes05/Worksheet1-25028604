@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
+//pop the string for the item
 public class Inventory : MonoBehaviour
 {
     public List<string> items = new List<string>();
 
+    
 
     public GameCon gameManager;
 
