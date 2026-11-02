@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 //pop the string for the item
 public class Inventory : MonoBehaviour
 {
-    public List<string> items = new List<string>();
+    public List<Item> items = new List<Item>();
 
     
 
@@ -22,21 +23,32 @@ public class Inventory : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                AddItemToInventory("Item1");
                 print("Item1 added to inventory");
             }
         }
     }
 
-    public void AddItemToInventory(string itemName)
+    public void AddItemToInventory(Item item)
     {
-        items.Add(itemName);
+        items.Add(item);
+
+        item.Oncollect();
     }
 
-    public void RemoveItemFromInventory(string itemName)
+    public void RemoveItemFromInventory() 
     {
-        items.Remove(itemName);
+        if (items.Count > 0)
+        {
+            Item item = items[0];
+            GameObject itemObject = item.gameObject;
+
+            items.Remove(item);
+        }
     }
+
+
+
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -45,9 +57,8 @@ public class Inventory : MonoBehaviour
         if (item != null)
         {
             Debug.Log("hit item");
-            items.Add(item.itemName);
-
-            item.Oncollect();
+           
+            AddItemToInventory((Item)item);
         }
 
        
