@@ -71,15 +71,15 @@ public class GameCon : MonoBehaviour
 
     void Start()
     {
-        // make the states
+        // makes the states
         GAMEPLAY = new GAMEPLAY();
         PAUSE = new PAUSE();
 
-        // hand them the controller
+        // hands them the controller
         GAMEPLAY.Initialize(this);
         PAUSE.Initialize(this);
 
-        // start on gameplay
+        // starts on gameplay
         ChangeState(GAMEPLAY);
     }
 

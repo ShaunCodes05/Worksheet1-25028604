@@ -15,7 +15,12 @@ public class PlayerCharacterController : StarterAssets.ThirdPersonController
     {
         if (value.isPressed)
         {
-            Debug.Log("Remove Item");
+            GameCon gameCon = FindAnyObjectByType<GameCon>();
+
+            if (gameCon.currentState == gameCon.GAMEPLAY)
+            {
+                FindAnyObjectByType<Inventory>().RemoveItemFromInventory();
+            }
         }
     }
 }

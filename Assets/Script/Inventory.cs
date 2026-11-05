@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
 {
     public List<Item> items = new List<Item>();
 
-    
+    public Transform worldItems;
 
     public GameCon gameManager;
 
@@ -43,6 +43,16 @@ public class Inventory : MonoBehaviour
             GameObject itemObject = item.gameObject;
 
             items.Remove(item);
+
+
+            Vector3 posistion = GetComponent<Transform>().position + GetComponent<Transform>().forward + Vector3.up;
+
+            Quaternion rotation = Quaternion.Euler(0, 180, 0 ) * GetComponent<Transform>().rotation;
+
+            GameObject newItem = Instantiate(itemObject, posistion, rotation, worldItems);
+            newItem.SetActive(true);
+
+            Destroy(itemObject);
         }
     }
 
