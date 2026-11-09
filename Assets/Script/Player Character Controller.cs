@@ -1,14 +1,15 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : StarterAssets.ThirdPersonController
 {
-   void Onpause(InputValue value)
+    void OnPause(InputValue value)
     {
         if (value.isPressed)
         {
             Debug.Log("pause Input Pressed");
-        }    
+        }
     }
 
     void OnRemoveItem(InputValue value)
@@ -19,7 +20,7 @@ public class PlayerCharacterController : StarterAssets.ThirdPersonController
 
             if (gameCon.currentState == gameCon.GAMEPLAY)
             {
-                FindAnyObjectByType<Inventory>().RemoveItemFromInventory();
+                FindAnyObjectByType<Inventory>().RemoveItemFromInventory(0);
             }
         }
     }

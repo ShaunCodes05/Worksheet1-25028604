@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-//pop the string for the item
 public class Inventory : MonoBehaviour
 {
     public List<Item> items= new List<Item>();
@@ -35,30 +34,32 @@ public class Inventory : MonoBehaviour
         item.Oncollect();
     }
 
-    public void RemoveItemFromInventory() 
+    public void RemoveItemFromInventory()
     {
-        if (items.Count > 0)
+        RemoveItemFromInventory(0);
+    }
+
+    public void RemoveItemFromInventory(int i)
+    {
+        if (items.Count > i && i >= 0)
         {
-            Item item = items[0];
+            Item item = items[i];
+
             GameObject itemObject = item.gameObject;
 
-            items.Remove(item);
+            items.RemoveAt(i);
 
+            Vector3 position = transform.position + transform.forward + Vector3.up;
 
-            Vector3 posistion = GetComponent<Transform>().position + GetComponent<Transform>().forward + Vector3.up;
+            Quaternion rotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
 
-            Quaternion rotation = Quaternion.Euler(0, 180, 0 ) * GetComponent<Transform>().rotation;
+            GameObject newItem = Instantiate(itemObject, position, rotation, worldItems);
 
-            GameObject newItem = Instantiate(itemObject, posistion, rotation, worldItems);
             newItem.SetActive(true);
 
             Destroy(itemObject);
         }
     }
-
-
-
-
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -70,10 +71,7 @@ public class Inventory : MonoBehaviour
            
             AddItemToInventory((Item)item);
         }
-
-       
+  
     }
-
    
-
 }
