@@ -6,6 +6,8 @@ public abstract class GameStateBase
 {
     protected GameCon controller;
 
+    public GameObject ItemUI;
+
     // gives the state a reference to the controller
     public void Initialize(GameCon controller)
     {
@@ -23,6 +25,7 @@ public class GAMEPLAY : GameStateBase
     public override void Enter()
     {
         Time.timeScale = 1.0f;
+        ItemUI.SetActive(false);
     }
 
     public override void Update()
@@ -45,6 +48,8 @@ public class PAUSE : GameStateBase
     public override void Enter()
     {
         Time.timeScale = 0.0f;
+        ItemUI.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public override void Update()
@@ -81,6 +86,7 @@ public class GameCon : MonoBehaviour
 
         // starts on gameplay
         ChangeState(GAMEPLAY);
+
     }
 
     void Update()

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8933425757150283089}
   - component: {fileID: 6346958745819175444}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MidItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   items: []
+  worldItems: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!114 &8933425757150283089
 MonoBehaviour:
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ebb174a00bb074e90331e1fec36aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemName: Orb
+  itemName: MidOrb
 --- !u!135 &6346958745819175444
 SphereCollider:
   m_ObjectHideFlags: 0

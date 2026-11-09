@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 //pop the string for the item
 public class Inventory : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    public List<Item> items= new List<Item>();
 
     public Transform worldItems;
 
