@@ -2126,6 +2126,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1835584538}
     m_Modifications:
+    - target: {fileID: 2267099916495866751, guid: 3ca03fea8b3d6dc45ba452caf950b9d1, type: 3}
+      propertyPath: m_Name
+      value: HighItem
+      objectReference: {fileID: 0}
     - target: {fileID: 4594142999074125635, guid: 3ca03fea8b3d6dc45ba452caf950b9d1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.35771
@@ -2181,6 +2185,10 @@ PrefabInstance:
     - target: {fileID: 6122950756252169827, guid: 3ca03fea8b3d6dc45ba452caf950b9d1, type: 3}
       propertyPath: m_Name
       value: High
+      objectReference: {fileID: 0}
+    - target: {fileID: 8933425757150283089, guid: 3ca03fea8b3d6dc45ba452caf950b9d1, type: 3}
+      propertyPath: itemName
+      value: MidOrb
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

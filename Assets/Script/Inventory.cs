@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class Inventory : MonoBehaviour
 {
@@ -52,6 +53,8 @@ public class Inventory : MonoBehaviour
             Vector3 position = transform.position + transform.forward + Vector3.up;
 
             Quaternion rotation = Quaternion.Euler(0, 180, 0) * transform.rotation;
+
+            item.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
             GameObject newItem = Instantiate(itemObject, position, rotation, worldItems);
 
